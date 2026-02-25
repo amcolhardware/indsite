@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AMCOL Industrial</title>
+  <link rel="stylesheet" href="/simple-site/styles.css"/>
+</head>
+<body>
+<div id="shell-header"></div>
+
+<section class="hero">
+  <div id="home-carousel" style="position:absolute;inset:0"></div>
+  <div class="hero-content"><h1>Supplying Excellence. Built for Industry.</h1></div>
+</section>
+
+<div class="container">
+  <form class="search-row" action="/simple-site/search.html" method="get">
+    <input class="search" type="search" name="q" placeholder="Search products..." required/>
+    <button class="btn btn-dark" type="submit">Search</button>
+  </form>
+</div>
+
+<section class="section"><div class="container"><h2>Industries We Serve</h2><div class="grid grid-4">
+<div class="card"><img src="/images/solar_panel.png" alt="Energy"/><div class="body"><h3>Energy</h3><a class="btn" href="/simple-site/products.html">Shop Now</a></div></div>
+<div class="card"><img src="/images/Welding_industrial.png" alt="Welding"/><div class="body"><h3>Welding</h3><a class="btn" href="/simple-site/products.html">Shop Now</a></div></div>
+<div class="card"><img src="/images/protective_equipment.png" alt="Safety"/><div class="body"><h3>Safety</h3><a class="btn" href="/simple-site/products.html">Shop Now</a></div></div>
+<div class="card"><img src="/images/RIG.jpg" alt="Marine"/><div class="body"><h3>Marine</h3><a class="btn" href="/simple-site/products.html">Shop Now</a></div></div>
+</div></div></section>
+
+<section class="section"><div class="container"><h2>Featured Brands</h2><p>WD-40 · Simple Green · Red Devil · DEWALT</p>
+<div class="grid grid-4">
+<img src="/images/3 WD-40 Cans Banner.png" alt="WD-40 Banner"/><img src="/images/Simple Green Safer Choice Banner.png" alt="Simple Green Banner"/><img src="/images/Reddevel-poster.png" alt="Red Devil Banner"/><img src="/images/Dewalt Kit.jpg" alt="Dewalt Banner"/>
+</div></div></section>
+
+<section class="section dark"><div class="container"><h2>News & Events</h2><p>A collection of articles on industrial sectors, business tips, and updates.</p><a class="btn" href="/simple-site/products.html">Browse Products</a></div></section>
+
+<div id="shell-footer"></div>
+<script src="/simple-site/app.js"></script>
+<script>mountShell('INDUSTRIAL');setupCarousel('#home-carousel',['/images/Heritage Industry.jpg','/images/TGU.jpg']);</script>
+</body>
+</html>

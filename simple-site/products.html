@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AMCOL Products</title>
+  <link rel="stylesheet" href="/simple-site/styles.css"/>
+</head>
+<body data-page="products">
+<div id="shell-header"></div>
+
+<section class="section dark">
+  <div class="container">
+    <h1>All Products</h1>
+    <p>Live data sourced from <code>https://industrial.amcolgroup.com/api</code>.</p>
+    <form id="search-form" class="search-row">
+      <input type="search" name="q" placeholder="Search products (e.g. makita drill)" required/>
+      <button class="btn btn-dark" type="submit">Search</button>
+    </form>
+    <p id="products-status" class="notice"></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Categories</h2>
+    <div id="categories-list" class="tags"></div>
+
+    <h2>Brands</h2>
+    <div id="brands-list" class="tags"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Featured Products</h2>
+    <div id="featured-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Random Products</h2>
+    <div id="random-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>All Products (API: /products)</h2>
+    <div id="all-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row-between">
+      <h2>Browse Products (API: /products/browse/{page})</h2>
+      <div class="pager">
+        <button id="prev-page" class="btn btn-dark" type="button">Prev</button>
+        <span id="browse-page" data-page="1">Page 1</span>
+        <button id="next-page" class="btn btn-dark" type="button">Next</button>
+      </div>
+    </div>
+    <div id="browse-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<div id="shell-footer"></div>
+<script src="/simple-site/app.js"></script>
+<script>mountShell('PRODUCTS');</script>
+</body>
+</html>
