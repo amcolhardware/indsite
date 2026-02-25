@@ -1,23 +1,73 @@
-<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>AMCOL Products</title><link rel="stylesheet" href="/simple-site/styles.css"/></head>
-<body>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AMCOL Products</title>
+  <link rel="stylesheet" href="/simple-site/styles.css"/>
+</head>
+<body data-page="products">
 <div id="shell-header"></div>
-<section class="section dark"><div class="container"><h1>World-Class Products</h1><p>Explore industrial, construction, and marine supplies built for durability.</p></div></section>
-<section class="section"><div class="container"><h2>Industries We Serve</h2><div class="grid grid-4">
-<div class="card"><div class="body"><h3>Energy Sector</h3><a href="/products/energy">Explore</a></div></div>
-<div class="card"><div class="body"><h3>Occupational Safety</h3><a href="/products/safety">Explore</a></div></div>
-<div class="card"><div class="body"><h3>Marine & Offshore</h3><a href="/products/marine">Explore</a></div></div>
-<div class="card"><div class="body"><h3>Welding & Fabrication</h3><a href="/products/welding">Explore</a></div></div>
-</div></div></section>
-<section class="section"><div class="container"><h2>Product Spotlight</h2><div class="grid grid-4">
-<div class="card"><img src="/images/3 WD-40 Cans Banner.png" alt="WD-40"/><div class="body"><strong>WD-40 Multi-Use Product</strong><p>Lubricants</p><p>$12.99</p></div></div>
-<div class="card"><img src="/images/Simple Green Safer Choice Banner.png" alt="Simple Green"/><div class="body"><strong>Simple Green All-Purpose Cleaner</strong><p>Cleaning</p><p>$15.50</p></div></div>
-<div class="card"><img src="/images/Silicone Tube with Red Devil Background.png" alt="Red Devil"/><div class="body"><strong>Red Devil Silicone Sealant</strong><p>Adhesives</p><p>$8.75</p></div></div>
-<div class="card"><img src="/images/Dewalt Kit.jpg" alt="Dewalt"/><div class="body"><strong>DeWalt Power Tool Kit</strong><p>Tools</p><p>$299.00</p></div></div>
-<div class="card"><img src="/images/solar_panel.png" alt="Solar"/><div class="body"><strong>Solar Panel Module</strong><p>Energy</p><p>Inquire</p></div></div>
-<div class="card"><img src="/images/protective_equipment.png" alt="Safety"/><div class="body"><strong>Industrial Safety Gear</strong><p>Safety</p><p>Inquire</p></div></div>
-<div class="card"><img src="/images/RIG.jpg" alt="Marine"/><div class="body"><strong>Marine Rigging Supplies</strong><p>Marine</p><p>Inquire</p></div></div>
-<div class="card"><img src="/images/Welding_industrial.png" alt="Welding"/><div class="body"><strong>Heavy Duty Welding Equipment</strong><p>Welding</p><p>Inquire</p></div></div>
-</div></div></section>
+
+<section class="section dark">
+  <div class="container">
+    <h1>All Products</h1>
+    <p>Live data sourced from <code>https://industrial.amcolgroup.com/api</code>.</p>
+    <form id="search-form" class="search-row">
+      <input type="search" name="q" placeholder="Search products (e.g. makita drill)" required/>
+      <button class="btn btn-dark" type="submit">Search</button>
+    </form>
+    <p id="products-status" class="notice"></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Categories</h2>
+    <div id="categories-list" class="tags"></div>
+
+    <h2>Brands</h2>
+    <div id="brands-list" class="tags"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Featured Products</h2>
+    <div id="featured-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Random Products</h2>
+    <div id="random-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>All Products (API: /products)</h2>
+    <div id="all-products" class="grid grid-4"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row-between">
+      <h2>Browse Products (API: /products/browse/{page})</h2>
+      <div class="pager">
+        <button id="prev-page" class="btn btn-dark" type="button">Prev</button>
+        <span id="browse-page" data-page="1">Page 1</span>
+        <button id="next-page" class="btn btn-dark" type="button">Next</button>
+      </div>
+    </div>
+    <div id="browse-products" class="grid grid-4"></div>
+  </div>
+</section>
+
 <div id="shell-footer"></div>
-<script src="/simple-site/app.js"></script><script>mountShell('PRODUCTS');</script>
-</body></html>
+<script src="/simple-site/app.js"></script>
+<script>mountShell('PRODUCTS');</script>
+</body>
+</html>

@@ -1,119 +1,113 @@
-# Functional Specification: AMCOL Industrial Site (Simple HTML/CSS/JS Recreation)
+# Functional Specification: AMCOL Industrial Site (Simple HTML/CSS/JS + API Integration)
 
 ## 1) Scope
 This repository contains:
-1. The original static Next.js export artifacts.
-2. A recreated implementation in plain HTML/CSS/JS under `simple-site/` that preserves the observed user-facing functionality.
+1. Original static Next.js export artifacts.
+2. A framework-free recreation under `simple-site/`.
+3. API integrations using `https://industrial.amcolgroup.com/api` for products, search, categories, and brands.
 
-This specification focuses on functional behavior and keeps layout concerns separate.
+## 2) Recursive Repository Read Summary
+A recursive file read confirms the repository includes:
+- Original exported pages and `_next` runtime artifacts.
+- Static media assets under `images/`.
+- Recreated simple pages/scripts/styles under `simple-site/`.
+- This updated functional specification.
 
-## 2) Repository Inventory (Recursive Read Summary)
-A recursive read of repository files identifies:
-- Original exported pages: `index.html`, `products.html`, `contact.html`, `404.html`, `products/*`.
-- Export runtime artifacts: `_next/static/*` chunks, media, and route payload files (`*.txt`, `__next.*.txt`).
-- Static image assets in `images/`.
-- Recreated simple implementation in `simple-site/`.
+## 3) Recreated Pages and Assets (`simple-site/`)
+- `index.html`: industrial landing page + search entry
+- `products.html`: API-backed products hub
+- `search.html`: API-backed search results page
+- `contact.html`: contact inquiry page
+- `404.html`: not-found page
+- `products/cleaners.html`, `products/detergents.html`, `products/soap.html`: placeholder category pages
+- `app.js`: shared shell + API + interactions
+- `styles.css`: shared presentation layer
 
-## 3) Recreated Implementation Files (`simple-site/`)
-- `simple-site/index.html` (industrial landing behavior)
-- `simple-site/products.html` (products listing behavior)
-- `simple-site/contact.html` (contact inquiry behavior)
-- `simple-site/404.html` (not-found behavior)
-- `simple-site/products/cleaners.html`, `detergents.html`, `soap.html` (category placeholders)
-- `simple-site/styles.css` (shared styling)
-- `simple-site/app.js` (shared behavior: nav shell, carousel, form handling)
+## 4) API Definition Integrated
+Base URL:
+- `https://industrial.amcolgroup.com/api`
 
-## 4) Core Functionality (Behavioral Requirements)
+Integrated endpoints:
+- `/products`
+- `/products/browse`
+- `/products/browse/1`
+- `/products/browse/2` (and additional pages via pagination controls)
+- `/products/rand`
+- `/products/featured`
+- `/search/{query}`
+- `/search/{query}/{page}`
+- `/categories`
+- `/brands`
 
-### 4.1 Routing and Page Availability
-The recreated implementation provides equivalent route-level pages for:
-- `/simple-site/index.html`
-- `/simple-site/products.html`
-- `/simple-site/contact.html`
-- `/simple-site/404.html`
+## 5) Core Functionality (Behavioral)
+
+### 5.1 Shared Shell Behavior
+- Reusable header/nav and footer are rendered by `mountShell(...)` from `app.js` on each page.
+- Navigation keeps legacy external links and simple-site internal links.
+
+### 5.2 Homepage (`simple-site/index.html`)
+- Hero carousel auto-rotates every 5 seconds with dot controls.
+- Search form routes users to `simple-site/search.html?q=<query>`.
+- Industry cards route to `simple-site/products.html`.
+
+### 5.3 Products Hub (`simple-site/products.html`)
+Products page fetches and renders:
+- All products from `/products`.
+- Featured products from `/products/featured`.
+- Random products from `/products/rand`.
+- Categories from `/categories` (rendered as tags).
+- Brands from `/brands` (rendered as tags).
+- Paged browse products from `/products/browse/{page}` with Prev/Next controls.
+
+Also provides a search form that routes to:
+- `simple-site/search.html?q=<query>&page=1`.
+
+### 5.4 Search Results (`simple-site/search.html`)
+- Reads query/page from URL parameters (`q`, `page`).
+- Uses:
+  - `/search/{query}` for page 1.
+  - `/search/{query}/{page}` for page >1.
+- Renders search results as product cards.
+- Supports Prev/Next pagination controls and updates URL state.
+
+### 5.5 Contact Page (`simple-site/contact.html`)
+- Contact form captures full name, email, company, phone, project type, urgency, and details.
+- Submit behavior is client-only:
+  - prevents default submit,
+  - logs payload to console,
+  - shows success alert,
+  - resets form.
+
+### 5.6 Placeholder Category Pages
 - `/simple-site/products/cleaners.html`
 - `/simple-site/products/detergents.html`
 - `/simple-site/products/soap.html`
 
-### 4.2 Global Navigation Behavior
-Shared header navigation supports:
-- HOME → external AMCOL legacy URL.
-- PRODUCTS → recreated products page.
-- CONSTRUCTION → external AMCOL construction URL.
-- INDUSTRIAL → recreated landing page.
-- DEPARTMENTS → `/departments` (retained link target).
-- CONTACT US → recreated contact page.
+Each displays a category placeholder message.
 
-Shared footer links include Privacy, Terms, and Contact placeholders.
+### 5.7 404 Page
+- `simple-site/404.html` shows a basic “This page could not be found.” message.
 
-### 4.3 Homepage Behavior (`simple-site/index.html`)
-- Hero background carousel with two slides:
-  - `/images/Heritage Industry.jpg`
-  - `/images/TGU.jpg`
-- Automatic slide rotation every 5 seconds.
-- Dot controls for manual slide selection.
-- Search input present (display-only; no backend/query behavior).
-- Industry cards present for Energy, Welding, Safety, Marine.
-- Brand section includes WD-40, Simple Green, Red Devil, DEWALT references.
-- “Read Latest News” CTA present.
+## 6) Data Handling Rules
+- API responses are normalized in `normalizeList(...)` to support common wrapper shapes (`data`, `results`, `items`, `products`, `categories`, `brands`).
+- Product fields are resolved from multiple key variants (`name/title/product_name`, `image/image_url/thumbnail/photo`, etc.).
+- Failed API calls display status error text on the page and write details to console.
 
-### 4.4 Products Behavior (`simple-site/products.html`)
-- “Industries We Serve” links maintained:
-  - `/products/energy`
-  - `/products/safety`
-  - `/products/marine`
-  - `/products/welding`
-- Product cards include mixed modes:
-  - Fixed-price cards (e.g., WD-40, Simple Green, Red Devil, DeWalt kit).
-  - Inquiry cards labeled “Inquire” (e.g., solar, safety, marine, welding).
+## 7) Layout and Presentation (Non-Core)
+- Shared sticky header and shared footer.
+- Responsive grid/card sections for products.
+- Tag chips for categories/brands.
+- Dark hero/status sections for products/search pages.
 
-### 4.5 Contact Behavior (`simple-site/contact.html`)
-Form fields:
-- Full Name, Work Email, Company Name, Direct Phone
-- Project Type dropdown
-- Urgency Level dropdown
-- Project Details / Requirements textarea
+## 8) Known Gaps
+- `/departments` remains a preserved nav target but is not implemented in `simple-site/`.
+- Contact form has no backend submission endpoint.
+- API schema is handled defensively, but exact response field naming may vary and can be tightened with final schema docs.
 
-Submit behavior:
-- Prevent default form post.
-- Log payload to browser console.
-- Show success alert: representative will follow up.
-- Reset form after submit.
-
-Direct contact blocks:
-- Corporate Sales details (John Doe, phone, Sales1@amcolgroup.com)
-- Technical Support details (Sarah Chen, phone, support@amcol.com)
-- Operating hours and office address.
-
-### 4.6 Category Placeholder Behavior
-Recreated category pages explicitly render category labels for:
-- cleaners
-- detergents
-- soap
-
-### 4.7 Not Found Behavior
-Recreated 404 page provides a simple “404 / This page could not be found.” response.
-
-## 5) Layout and Presentation Requirements (Non-Core)
-- Shared sticky-style top header and shared footer across recreated pages.
-- Responsive grid/card layout for sectors and products.
-- Hero sections with image overlays for contrast.
-- Consistent button, input, and card styling via `simple-site/styles.css`.
-
-## 6) Non-Functional Requirements
-- Recreated implementation must run as static files with no framework/runtime dependency.
-- All interactions implemented with vanilla JS (`simple-site/app.js`).
-- All referenced assets are loaded from existing repo `images/` paths.
-
-## 7) Known Gaps Retained from Source Behavior
-- Links such as `/departments`, `/products/energy`, `/products/safety`, `/products/marine`, `/products/welding` are preserved but not implemented as recreated pages in this change.
-- Search input remains UI-only without filtering/search backend.
-- Contact submit remains client-side only (no API persistence).
-
-## 8) Acceptance Criteria
-1. Recreated pages load as static HTML with shared nav/footer shell.
-2. Homepage carousel auto-rotates every ~5s and supports manual dot selection.
-3. Products page shows both fixed-price and inquiry product cards.
-4. Contact form captures inputs, logs payload, alerts success, and resets.
-5. Category pages render with explicit category labels.
-6. 404 page renders a not-found message.
+## 9) Acceptance Criteria
+1. Products page loads categories and brands from API.
+2. Products page loads all/featured/random/browse product datasets from API.
+3. Browse pagination updates products for target page.
+4. Search page executes API search for page 1 and subsequent pages.
+5. Search and products pages show meaningful status messages on load/failure.
+6. Existing homepage carousel and contact behaviors continue to work.

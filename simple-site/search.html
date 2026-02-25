@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AMCOL Search</title>
+  <link rel="stylesheet" href="/simple-site/styles.css"/>
+</head>
+<body data-page="search">
+<div id="shell-header"></div>
+
+<section class="section dark">
+  <div class="container">
+    <h1 id="search-heading">Search Products</h1>
+    <form id="search-page-form" class="search-row">
+      <input id="search-q" type="search" name="q" placeholder="Search products" required/>
+      <button class="btn btn-dark" type="submit">Search</button>
+    </form>
+    <div class="row-between">
+      <p id="search-status" class="notice"></p>
+      <div class="pager">
+        <button id="search-prev" class="btn btn-dark" type="button">Prev</button>
+        <span id="search-page-indicator">Page 1</span>
+        <button id="search-next" class="btn btn-dark" type="button">Next</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div id="search-results" class="grid grid-4"></div>
+  </div>
+</section>
+
+<div id="shell-footer"></div>
+<script src="/simple-site/app.js"></script>
+<script>mountShell('PRODUCTS');</script>
+</body>
+</html>
